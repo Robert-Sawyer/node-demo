@@ -32,7 +32,6 @@ app.listen(port)
 // util.adding(2,6)
 
 
-
 // //poniżej sposób na tworzenie serwera bez użycia biblitoeki express, która upraszcza ten proces
 //
 //
