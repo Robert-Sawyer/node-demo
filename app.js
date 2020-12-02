@@ -1,14 +1,23 @@
-//pobieram biblotekę express i ustawiam port
+//pobieram biblotekę express i ustawiam port (jeśli dostawca serwera - heroku nie dostarczy zmiennej z portem wtedy ustaw na 5000 (lokalnie0
 const express = require('express');
 const port = process.env.PORT || 5000;
 
 //tworzę zmienną reprezentującą moją aplikację
 const app = express();
 
-//chcę, żeby w momencie gdy użytkownik wejdzie na stronę, tj użyje requesta get i ustawiam ścieżkę root
+//ustawiam w app, żeby aplikacja korzystała z silnika szablonów view engine o nazwie hbs
+app.set('view engine', 'hbs');
 
+//chcę, żeby w momencie gdy użytkownik wejdzie na stronę, tj użyje requesta get i ustawiam ścieżkę root zobaczył komunikat
 app.get('/', function (req, res) {
-    res.send('No cześć')
+    // res.send('No cześć') - wykorzystywyane gdy nie korzystać z szablonów
+
+    //chcę, żeby hbs wyrenderował mi stronę na podstawie szablonu index, który domyślnie jest szukanyw folderze views
+    //i dynamicznie podstawiał poprzez zmienne zawartośc i tytuł strony
+    res.render('index', {
+        pageTitle: 'node',
+        bodyContent: 'helo blablabla',
+    })
 })
 app.get('/oMnie', function (req, res) {
     res.send('To jest strona o mnie')
@@ -16,17 +25,7 @@ app.get('/oMnie', function (req, res) {
 
 app.listen(port)
 
-// app.set('view engine', 'hbs');
-//
-// app.get('/', (req, res) => {
-//     res.render('index', {
-//         pageTitle: 'node',
-//         bodyContent: 'helo blablabla'
-//     })
-// })
-//
-// app.listen(port);
-//
+
 // const util = require('./utils')
 //
 // util.greetings()
